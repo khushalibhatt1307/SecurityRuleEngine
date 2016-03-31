@@ -1,9 +1,12 @@
 package SecurityRuleEngine;
 
+import FinanceSystem.Government;
+import FinanceSystem.Security;
+
 public class IssuerRule implements Rule {
 	Security security;
 
-	IssuerRule(Security security) {
+	public IssuerRule(Security security) {
 		this.security = security;
 	}
 

@@ -1,4 +1,4 @@
-package SecurityRuleEngine;
+package FinanceSystem;
 
 public class Equity extends Security {
 

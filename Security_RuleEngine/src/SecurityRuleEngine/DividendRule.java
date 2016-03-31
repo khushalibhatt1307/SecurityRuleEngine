@@ -1,9 +1,11 @@
 package SecurityRuleEngine;
 
+import FinanceSystem.Equity;
+
 public class DividendRule implements Rule {
 	Equity equity;
 
-	DividendRule(Equity equity) {
+	public DividendRule(Equity equity) {
 		this.equity = equity;
 	}
 

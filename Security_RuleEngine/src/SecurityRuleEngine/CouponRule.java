@@ -1,5 +1,7 @@
 package SecurityRuleEngine;
 
+import FinanceSystem.Bond;
+
 public class CouponRule implements Rule {
 	Bond bond;
 
