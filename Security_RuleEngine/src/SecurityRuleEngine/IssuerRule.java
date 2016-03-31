@@ -1,17 +1,21 @@
 package SecurityRuleEngine;
 
-import FinanceSystem.Government;
+import FinanceSystem.Issuer;
 import FinanceSystem.Security;
 
 public class IssuerRule extends Rule {
 
-	public IssuerRule(Security security) {
+	private Issuer issuer;
+	
+	public IssuerRule(Security security, Issuer issuer) {
 		super(security);
+		this.issuer = issuer;
 	}
 
 	public boolean execute() {
-		// rule which only accepts security that is issued by US government
-		if ((security.getIssuer() instanceof Government) && (security.getIssuer().getName() == "US GOVERNMENT")) {
+		// rule which only accepts security that is issued by given issuer
+		if (security.getIssuer().getClass().equals(this.issuer.getClass()) &&
+			security.getIssuer().getName().equals(this.issuer.getName())) {
 			return true;
 		}
 		return false;

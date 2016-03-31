@@ -40,7 +40,7 @@ public class SecurityRuleEngineTest {
 		Equity equity = new Equity();
 		equity.setIssuer(issuer);
 		RuleEngine ruleEngine = new RuleEngine();
-		ruleEngine.addRule(new IssuerRule(equity));
+		ruleEngine.addRule(new IssuerRule(equity, issuer));
 		assertTrue(ruleEngine.processAllRules());
 	}
 
@@ -49,8 +49,11 @@ public class SecurityRuleEngineTest {
 		Issuer issuer = new Government("INDIAN GOVERNMENT");
 		Equity equity = new Equity();
 		equity.setIssuer(issuer);
+		
+		Issuer issuer2 = new Government("US GOVERNMENT");
+
 		RuleEngine ruleEngine = new RuleEngine();
-		ruleEngine.addRule(new IssuerRule(equity));
+		ruleEngine.addRule(new IssuerRule(equity, issuer2));
 		assertFalse(ruleEngine.processAllRules());
 	}
 	
@@ -59,8 +62,11 @@ public class SecurityRuleEngineTest {
 		Issuer issuer = new Corporation("Facebook Inc.");
 		Equity equity = new Equity();
 		equity.setIssuer(issuer);
+		
+		Issuer issuer2 = new Corporation("Calypso");
+
 		RuleEngine ruleEngine = new RuleEngine();
-		ruleEngine.addRule(new IssuerRule(equity));
+		ruleEngine.addRule(new IssuerRule(equity, issuer2));
 		assertFalse(ruleEngine.processAllRules());
 	}
 
@@ -74,9 +80,29 @@ public class SecurityRuleEngineTest {
 		equity.setDividend(150);
 		
 		RuleEngine ruleEngine = new RuleEngine();
-		ruleEngine.addRule(new IssuerRule(bond));
+		ruleEngine.addRule(new IssuerRule(bond, issuer));
 		ruleEngine.addRule(new DividendRule(equity));
 		
 		assertTrue(ruleEngine.processAllRules());
 	}
+	
+	@Test
+	public void testMultipleRulesFailure() {
+		Issuer issuer = new Government("US GOVERNMENT");
+		Bond bond = new Bond();
+		bond.setIssuer(issuer);
+		
+		Issuer issuer2 = new Government("INDIAN GOVERNMENT");
+		
+		Equity equity = new Equity();
+		equity.setDividend(50);
+		
+		RuleEngine ruleEngine = new RuleEngine();
+		ruleEngine.addRule(new IssuerRule(bond, issuer2));
+		ruleEngine.addRule(new DividendRule(equity));
+		
+		assertFalse(ruleEngine.processAllRules());
+	}
+	
+	
 }
