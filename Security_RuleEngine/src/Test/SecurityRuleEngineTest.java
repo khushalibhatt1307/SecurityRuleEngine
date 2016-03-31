@@ -5,6 +5,7 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
+import FinanceSystem.Bond;
 import FinanceSystem.Corporation;
 import FinanceSystem.Equity;
 import FinanceSystem.Government;
@@ -66,15 +67,15 @@ public class SecurityRuleEngineTest {
 	@Test
 	public void testMultipleRulesSuccess() {
 		Issuer issuer = new Government("US GOVERNMENT");
-		Equity equity = new Equity();
-		equity.setIssuer(issuer);
+		Bond bond = new Bond();
+		bond.setIssuer(issuer);
 		
-		Equity equity2 = new Equity();
-		equity2.setDividend(150);
+		Equity equity = new Equity();
+		equity.setDividend(150);
 		
 		RuleEngine ruleEngine = new RuleEngine();
-		ruleEngine.addRule(new IssuerRule(equity));
-		ruleEngine.addRule(new DividendRule(equity2));
+		ruleEngine.addRule(new IssuerRule(bond));
+		ruleEngine.addRule(new DividendRule(equity));
 		
 		assertTrue(ruleEngine.processAllRules());
 	}

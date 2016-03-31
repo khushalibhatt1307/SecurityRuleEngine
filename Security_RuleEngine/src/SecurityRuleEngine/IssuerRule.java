@@ -3,11 +3,10 @@ package SecurityRuleEngine;
 import FinanceSystem.Government;
 import FinanceSystem.Security;
 
-public class IssuerRule implements Rule {
-	Security security;
+public class IssuerRule extends Rule {
 
 	public IssuerRule(Security security) {
-		this.security = security;
+		super(security);
 	}
 
 	public boolean execute() {

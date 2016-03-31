@@ -6,4 +6,7 @@ public class Bond extends Security {
 		super(issuer);
 	}
 
+	public Bond() {
+	}
+
 }
